@@ -65,9 +65,9 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
           <div key={idx}>
             <p>
               <strong>{msg.sender}:</strong> {msg.text}
-              {/* {msg.sender === "Soul AI" && (
+              { {msg.sender === "Soul AI" && (
                 <span className="ml-2 text-blue-600">Soul AI</span>
-              )} */}
+              )} 
             </p>
           </div>
         ))}
