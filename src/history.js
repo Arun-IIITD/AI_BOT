@@ -1,43 +1,20 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
+import React from "react";
 
-// const History = ({ loadChat }) => {
-//   const [savedChats, setSavedChats] = useState([]);
+const History = ({ chatSessions }) => {
+  return (
+    <div>
+      <h2>Past Conversations</h2>
+      {chatSessions.length === 0 && <p>No conversations yet.</p>}
+      {chatSessions.map((chat) => (
+        <div key={chat.id} className="mb-4 p-2 border rounded">
+          <h4>{chat.title}</h4>
+          {chat.messages.map((msg, idx) => (
+            <p key={idx}>{msg.text}</p>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
 
-//   useEffect(() => {
-//     fetchHistory();
-//   }, []);
-
-//   const fetchHistory = () => {
-//     axios
-//       .get("https://localhost:3000/history")
-//       .then((res) => setSavedChats(res.data))
-//       .catch((err) => console.log(err));
-//   };
-
-//   return (
-//     <div className="history p-4 border-r h-screen w-60">
-//       <button
-//         className="mb-4 w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-//         onClick={() => loadChat(null)} // start new chat
-//       >
-//         + New Chat
-//       </button>
-
-//       <h3 className="font-semibold mb-2">Saved Chats</h3>
-//       <ul>
-//         {savedChats.map((chat) => (
-//           <li
-//             key={chat.id}
-//             className="cursor-pointer p-2 hover:bg-gray-200 rounded"
-//             onClick={() => loadChat(chat)}
-//           >
-//             {chat.title}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default History;
+export default History;

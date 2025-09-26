@@ -10,8 +10,10 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
     setMessages(activeChat?.messages || []);
   }, [activeChat]);
 
-  const giveRes = () => {
-    let response = "Sorry, did not understand your query!";
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let response = "Sorry, Did not understand your query!"; // exact text from test
     for (let i = 0; i < sample.length; i++) {
       if (query.toLowerCase() === sample[i].question.toLowerCase()) {
         response = sample[i].response;
@@ -24,6 +26,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
       { sender: "You", text: query },
       { sender: "Soul AI", text: response },
     ];
+
     setMessages(newMessages);
     setQuery("");
   };
@@ -34,8 +37,8 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
 
   return (
     <div className="main-chat flex flex-col gap-4 w-full max-w-md">
-      {/* Input + buttons */}
-      <div className="flex gap-2">
+      {/* Form with submit button */}
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
           placeholder="Message Bot AI..."
@@ -44,18 +47,19 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
           className="flex-1 p-2 border rounded"
         />
         <button
-          onClick={giveRes}
+          type="submit"
           className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           Ask
         </button>
         <button
+          type="button"
           onClick={saveChat}
           className="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400"
         >
           Save
         </button>
-      </div>
+      </form>
 
       {/* Messages */}
       <div className="flex flex-col gap-2 mt-4">
@@ -66,6 +70,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
             <span className="text-xs text-gray-500">
               {new Date().toLocaleTimeString()}
             </span>
+            {msg.sender === "Soul AI" && <span>Soul AI</span>}
           </div>
         ))}
       </div>
