@@ -1,0 +1,9 @@
+.main-chat {
+  margin-left: 220px;   /* pushes chat beside sidebar */
+  height: 100vh;
+  background-color: #fff;
+
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* horizontal center */
+  align-items: center;        /* vertical center */
+}
