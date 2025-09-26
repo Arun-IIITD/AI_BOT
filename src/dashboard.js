@@ -51,6 +51,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         >
           Ask
         </button>
+
         <button
           type="button"
           onClick={handleSave}
@@ -60,7 +61,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         </button>
       </form>
 
-      <div className="flex flex-col gap-2 mt-4">
+      {/* <div className="flex flex-col gap-2 mt-4">
         {messages.map((msg, idx) => (
           <div key={idx} className="">
             <h3 className="font-semibold">{msg.sender}</h3>
@@ -70,7 +71,24 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
             </span>
           </div>
         ))}
-      </div>
+      </div> */}
+
+      <div className="flex flex-col gap-2 mt-4">
+  {messages.map((msg, idx) => (
+    <div key={idx} className="">
+      <strong>{msg.sender}:</strong> {msg.text}
+      {msg.sender === "Soul AI" && (
+        <span className="ml-2 text-blue-600">Soul AI</span>
+      )}
+    </div>
+  ))}
+</div>
+
+
+
+
+
+
     </div>
   );
 };
