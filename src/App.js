@@ -86,6 +86,7 @@ const App = () => {
                 />
               }
             />
+            
             <Route
               path="/history"
               element={<History chatSessions={chatSessions} />}

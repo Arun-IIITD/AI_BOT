@@ -2,8 +2,8 @@ import React from "react";
 
 const History = ({ chatSessions }) => {
   return (
-    <div>
-      <h2>Past Conversations</h2>
+    <div className="history-page">
+      <h1>Past Conversations</h1>
       {chatSessions.length === 0 && <p>No conversations yet.</p>}
       {chatSessions.map((chat) => (
         <div key={chat.id} className="mb-4 p-2 border rounded">
