@@ -3,11 +3,18 @@ import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 
 
-const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
+const Sidebar = ({ chatSessions, loadChat, startNewChat, deleteChat }) => {
     const navigate = useNavigate();
   return (
     <div className="sidebar">
-      <button className="sidebar-btn" onClick={startNewChat}>
+      <button 
+      className="sidebar-btn" 
+      placeholder="Message Bot AI..."
+       onClick={() => {
+          startNewChat();
+          navigate("/dashboard"); 
+        }}
+        >
         New Chat
       </button>
 
@@ -18,12 +25,26 @@ const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
         Past Conversations
       </button>
 
+      
+        <button className="sidebar-btn" onClick={() => navigate("/feedback")}>
+          Feedback Overview
+        </button>
+
+
+
         <ul className="sidebar-list">
           {chatSessions.length === 0 && <li>No conversations yet</li>}
           {chatSessions.map((chat) => (
-            <li key={chat.id} onClick={() => loadChat(chat)}>
-              {chat.title}
+             <li key={chat.id} className="sidebar-item">
+              <span onClick={() => loadChat(chat)}>{chat.title}</span>
+              <button
+                className="delete-btn"
+                onClick={() => deleteChat(chat.id)}
+              >
+                del
+              </button>
             </li>
+       
           ))}
         </ul>
       </div>

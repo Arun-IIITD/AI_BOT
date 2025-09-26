@@ -1,9 +1,41 @@
 .main-chat {
-  margin-left: 220px;   /* pushes chat beside sidebar */
+  margin-left: 250px;   /* pushes chat beside sidebar */
   height: 100vh;
   background-color: #fff;
-
+  z-index: 2;
   display: flex;              /* enable flexbox */
   justify-content: center;    /* horizontal center */
   align-items: center;        /* vertical center */
+  position: relative;
 }
+
+.message {
+  margin: 8px 0;
+  padding: 6px;
+}
+.message.ai {
+  position: relative;
+}
+.feedback-btns {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.message.ai:hover .feedback-btns {
+  display: inline-block;
+}
+
+.stars {
+  font-size: 24px;
+  cursor: pointer;
+}
+.star {
+  color: gray;
+}
+.star.filled {
+  color: gold;
+}
+
+
+

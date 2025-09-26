@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Dashboard from "./dashboard";
 import History from "./history";
 import "./dashboard.css";
+import Feedback from "./feedback";
+
 
 const STORAGE_KEY = "chatSessions";
 
@@ -46,9 +48,22 @@ const App = () => {
     }
   };
 
+  const deleteChat = (chatId) => {
+  setChatSessions((prev) => prev.filter((chat) => chat.id !== chatId));
+
+  // If the deleted chat was active, reset activeChat
+  if (activeChat?.id === chatId) {
+    setActiveChat(null);
+  }
+};
+
+
+
+
   const loadChat = (chat) => setActiveChat(chat);
 
   const startNewChat = () => {
+
     const timestamp = new Date().toLocaleString();
     const newChat = {
       id: `${chatSessions.length + 1}`,
@@ -63,10 +78,6 @@ const App = () => {
     <Router>
       <header className="p-4 bg-gray-800 text-white">
         <h1>Bot AI</h1>
-        <nav className="mt-2">
-          <Link to="/" className="mr-4">New Chat</Link>
-          <Link to="/history">Past Conversations</Link>
-        </nav>
       </header>
 
       <div className="flex h-screen">
@@ -74,11 +85,12 @@ const App = () => {
           chatSessions={chatSessions}
           loadChat={loadChat}
           startNewChat={startNewChat}
+          deleteChat={deleteChat}
         />
         <div className="main-chat flex-1 p-4">
           <Routes>
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <Dashboard
                   activeChat={activeChat}
@@ -86,12 +98,19 @@ const App = () => {
                 />
               }
             />
-            
+
             <Route
               path="/history"
               element={<History chatSessions={chatSessions} />}
             />
+
+            <Route
+            path="/feedback"
+            element={<Feedback chatSessions={chatSessions} />}
+          />
+
           </Routes>
+
         </div>
       </div>
     </Router>
