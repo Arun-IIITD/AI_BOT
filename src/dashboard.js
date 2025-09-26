@@ -13,7 +13,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let response = "Sorry, Did not understand your query!"; // match test
+    let response = "Sorry, Did not understand your query!";
     for (let i = 0; i < sample.length; i++) {
       if (query.toLowerCase() === sample[i].question.toLowerCase()) {
         response = sample[i].response;
@@ -32,7 +32,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
   };
 
   const handleSave = () => {
-     if (messages.length > 0) saveChatSession(messages);
+    saveChatSession(messages);
   };
 
   return (
@@ -51,7 +51,6 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         >
           Ask
         </button>
-
         <button
           type="button"
           onClick={handleSave}
@@ -61,26 +60,18 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         </button>
       </form>
 
-  
-
       <div className="flex flex-col gap-2 mt-4">
-  {messages.map((msg, idx) => (
-    <div key={idx} className="">
-      <p>
-      <strong>{msg.sender}:</strong> {msg.text}
-      {msg.sender === "Soul AI" && (
-        <span className="ml-2 text-blue-600">Soul AI</span>
-      )}
-      </p>
-    </div>
-  ))}
-</div>
-
-
-
-
-
-
+        {messages.map((msg, idx) => (
+          <div key={idx}>
+            <p>
+              <strong>{msg.sender}:</strong> {msg.text}
+              {/* {msg.sender === "Soul AI" && (
+                <span className="ml-2 text-blue-600">Soul AI</span>
+              )} */}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

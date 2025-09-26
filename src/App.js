@@ -3,26 +3,24 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import Dashboard from "./dashboard";
 import History from "./history";
-import "./dashboard.css";
 import Feedback from "./feedback";
+import "./dashboard.css";
 
 const STORAGE_KEY = "chatSessions";
 
 const App = () => {
   const [chatSessions, setChatSessions] = useState([]);
-  const [activeChat, setActiveChat] = useState(null);
+  const [activeChat, setActiveChat] = useState({ id: null, title: "", messages: [] });
 
-  // Load from localStorage
+  // Load chats from localStorage
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) setChatSessions(JSON.parse(stored));
   }, []);
 
-  // Save to localStorage always
+  // Save chats to localStorage
   useEffect(() => {
-     if (chatSessions.length > 0) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(chatSessions));
-     }
   }, [chatSessions]);
 
   const saveChatSession = (messages) => {
@@ -31,14 +29,12 @@ const App = () => {
     const title = firstUserMsg?.text || `Chat ${chatSessions.length + 1}`;
 
     if (activeChat && activeChat.id) {
-      // Update existing chat
       const updatedChat = { ...activeChat, title, messages };
       setChatSessions((prev) =>
         prev.map((chat) => (chat.id === activeChat.id ? updatedChat : chat))
       );
       setActiveChat(updatedChat);
     } else {
-      // Create new chat
       const newSession = {
         id: Date.now().toString(),
         title,
@@ -52,17 +48,20 @@ const App = () => {
   const loadChat = (chat) => setActiveChat(chat);
 
   const startNewChat = () => {
-    // Clear active chat for new conversation
     setActiveChat({ id: null, title: "", messages: [] });
   };
 
   return (
     <Router>
-      <header className="p-4 bg-gray-800 text-white">
+      <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
         <h1>Bot AI</h1>
         <nav className="mt-2">
-          <Link to="/" className="mr-4">New Chat</Link>
-          <Link to="/history">Past Conversations</Link>
+          <Link to="/" className="mr-4 header-btn" onClick={startNewChat}>
+            New Chat
+          </Link>
+          <Link to="/history" className="header-btn">
+            Past Conversations
+          </Link>
         </nav>
       </header>
 
@@ -89,7 +88,7 @@ const App = () => {
             />
             <Route
               path="/feedback"
-              element={<Feedback chatSessions={chatSessions} />}
+              element={<Feedback />}
             />
           </Routes>
         </div>
