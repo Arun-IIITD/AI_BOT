@@ -9,7 +9,7 @@ const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
         New Chat
       </Link>
 
-      <div className="sidebar-section">
+      {/* <div className="sidebar-section"> */}
         <Link to="/history" className="sidebar-btn">
           Past Conversations
         </Link>
@@ -23,7 +23,7 @@ const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
           ))}
         </ul>
       </div>
-    </div>
+    // </div>
   );
 };
 

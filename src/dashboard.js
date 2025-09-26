@@ -32,7 +32,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
   };
 
   const handleSave = () => {
-    saveChatSession(messages);
+     if (messages.length > 0) saveChatSession(messages);
   };
 
   return (

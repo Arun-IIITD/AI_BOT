@@ -14,7 +14,10 @@ const History = ({ chatSessions }) => {
 
   return (
     <div className="history-page">
+
+      <div>
       <h2>Past Conversations</h2>
+      </div>
 
       {chatSessions.length === 0 && <p>No past conversations yet.</p>}
 
@@ -23,14 +26,14 @@ const History = ({ chatSessions }) => {
           <h3>{chat.title}</h3>
 
           <ul className="messages-list">
-            {chat.messages.map((msg, idx) => (
-              <li
-                key={idx}
-                className={msg.sender === "You" ? "user-msg" : "ai-msg"}
-              >
-                <strong>{msg.sender}:</strong> {msg.text}
-              </li>
-            ))}
+           {chat.messages.map((msg, idx) => (
+  <div key={idx} className="">
+    <p>
+      <strong>{msg.sender}:</strong> {msg.text}
+    </p>
+  </div>
+))}
+
           </ul>
 
           {/* Show existing feedback */}

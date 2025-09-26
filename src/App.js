@@ -20,7 +20,9 @@ const App = () => {
 
   // Save to localStorage always
   useEffect(() => {
+     if (chatSessions.length > 0) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(chatSessions));
+     }
   }, [chatSessions]);
 
   const saveChatSession = (messages) => {
