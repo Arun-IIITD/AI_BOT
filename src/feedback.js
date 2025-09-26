@@ -1,71 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 
-const Feedback = ({ chatSessions }) => {
-  const [filter, setFilter] = useState(null);
+const Feedback = () => {
+  const location = useLocation();
+  const { chat } = location.state || {}; // Get the chat object
 
-  // collect all feedback entries
-  const allFeedback = chatSessions.flatMap((chat) => {
-    const aiFeedback = chat.messages
-      .filter((msg) => msg.sender === "Soul AI" && msg.feedback)
-      .map((msg) => ({
-        chatId: chat.id,
-        chatTitle: chat.title,
-        type: "message",
-        feedback: msg.feedback,
-      }));
-
-    const convoFeedback = chat.endFeedback
-      ? [
-          {
-            chatId: chat.id,
-            chatTitle: chat.title,
-            type: "conversation",
-            rating: chat.endFeedback.rating,
-            feedback: chat.endFeedback.feedback,
-          },
-        ]
-      : [];
-
-    return [...aiFeedback, ...convoFeedback];
-  });
-
-  // filter if rating selected
-  const filteredFeedback = filter
-    ? allFeedback.filter(
-        (f) => f.type === "conversation" && f.rating === filter
-      )
-    : allFeedback;
+  if (!chat) return <p>No chat selected for feedback.</p>;
 
   return (
-    <div>
-      <h2>Feedback Overview</h2>
+    <div className="feedback-page p-4">
+      <h2>Feedback for: {chat.title}</h2>
 
-      <div>
-        <label>Filter by Rating: </label>
-        {[1, 2, 3, 4, 5].map((r) => (
-          <button key={r} onClick={() => setFilter(r)}>
-            {r} ★
-          </button>
-        ))}
-        <button onClick={() => setFilter(null)}>Clear</button>
-      </div>
-
-      {filteredFeedback.length === 0 && <p>No feedback yet.</p>}
-
-      <ul>
-        {filteredFeedback.map((f, idx) => (
-          <li key={idx}>
-            <strong>{f.chatTitle}</strong> —{" "}
-            {f.type === "message" ? (
-              <span>AI Reply Feedback: {f.feedback}</span>
-            ) : (
-              <span>
-                Rating: {f.rating} / 5 | Notes: {f.feedback}
-              </span>
-            )}
+      <ul className="messages-list">
+        {chat.messages.map((msg, idx) => (
+          <li
+            key={idx}
+            className={msg.sender === "You" ? "user-msg" : "ai-msg"}
+          >
+            <strong>{msg.sender}:</strong> {msg.text}
           </li>
         ))}
       </ul>
+
+      <div className="mt-4">
+        <label htmlFor="feedback-text" className="font-semibold">
+          Your Feedback:
+        </label>
+        <textarea
+          id="feedback-text"
+          className="border rounded w-full p-2 mt-1"
+          placeholder="Enter your feedback here..."
+        />
+        <button className="mt-2 px-4 py-2 bg-blue-600 text-white rounded">
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const History = ({ chatSessions, loadChat }) => {
+const History = ({ chatSessions }) => {
   return (
     <div className="history-page">
       <h2>Past Conversations</h2>
@@ -13,29 +14,25 @@ const History = ({ chatSessions, loadChat }) => {
 
           <ul className="messages-list">
             {chat.messages.map((msg, idx) => (
-              <li key={idx} className={msg.sender === "You" ? "user-msg" : "ai-msg"}>
+              <li
+                key={idx}
+                className={msg.sender === "You" ? "user-msg" : "ai-msg"}
+              >
                 <strong>{msg.sender}:</strong> {msg.text}
-                {msg.sender === "Soul AI" && msg.feedback && (
-                  <span className="msg-feedback"> ({msg.feedback})</span>
-                )}
               </li>
             ))}
           </ul>
 
-          {chat.endFeedback && (
-            <div className="end-feedback">
-              <p>
-                <strong>Rating:</strong> {chat.endFeedback.rating} / 5
-              </p>
-              <p>
-                <strong>Notes:</strong> {chat.endFeedback.feedback}
-              </p>
-            </div>
-          )}
-
-          <button type="button" onClick={() => loadChat(chat)}>
-            Continue This Chat
-          </button>
+          {/* Link to Feedback page */}
+          <div className="mt-2">
+            <Link
+              to="/feedback"
+              state={{ chat }}
+              className="text-blue-600 hover:underline"
+            >
+              Give Feedback
+            </Link>
+          </div>
         </div>
       ))}
     </div>
