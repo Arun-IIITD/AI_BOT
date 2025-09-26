@@ -13,7 +13,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let response = "Sorry, Did not understand your query!"; // exact text from test
+    let response = "Sorry, Did not understand your query!"; // match test
     for (let i = 0; i < sample.length; i++) {
       if (query.toLowerCase() === sample[i].question.toLowerCase()) {
         response = sample[i].response;
@@ -31,13 +31,12 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
     setQuery("");
   };
 
-  const saveChat = () => {
+  const handleSave = () => {
     saveChatSession(messages);
   };
 
   return (
     <div className="main-chat flex flex-col gap-4 w-full max-w-md">
-      {/* Form with submit button */}
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
@@ -54,14 +53,13 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         </button>
         <button
           type="button"
-          onClick={saveChat}
+          onClick={handleSave}
           className="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400"
         >
           Save
         </button>
       </form>
 
-      {/* Messages */}
       <div className="flex flex-col gap-2 mt-4">
         {messages.map((msg, idx) => (
           <div key={idx} className="">
@@ -70,7 +68,6 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
             <span className="text-xs text-gray-500">
               {new Date().toLocaleTimeString()}
             </span>
-            {msg.sender === "Soul AI" && <span>Soul AI</span>}
           </div>
         ))}
       </div>

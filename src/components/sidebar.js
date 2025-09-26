@@ -5,17 +5,11 @@ import { Link } from "react-router-dom";
 const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
   return (
     <div className="sidebar">
-      {/* New Chat as Link for Cypress detection */}
-      <Link
-        to="/"
-        className="sidebar-btn"
-        onClick={startNewChat}
-      >
+      <Link to="/" className="sidebar-btn" onClick={startNewChat}>
         New Chat
       </Link>
 
       <div className="sidebar-section">
-        {/* Past Conversations as Link */}
         <Link to="/history" className="sidebar-btn">
           Past Conversations
         </Link>

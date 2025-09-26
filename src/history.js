@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const FEEDBACK_KEY = "chatFeedbacks";
+
 const History = ({ chatSessions }) => {
+  const [feedbacks, setFeedbacks] = useState({});
+
+  // Load feedbacks from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem(FEEDBACK_KEY);
+    if (stored) setFeedbacks(JSON.parse(stored));
+  }, []);
+
   return (
     <div className="history-page">
       <h2>Past Conversations</h2>
@@ -23,6 +33,13 @@ const History = ({ chatSessions }) => {
             ))}
           </ul>
 
+          {/* Show existing feedback */}
+          {feedbacks[chat.id] && (
+            <p className="mt-2 text-green-700">
+              <strong>Feedback:</strong> {feedbacks[chat.id]}
+            </p>
+          )}
+
           {/* Link to Feedback page */}
           <div className="mt-2">
             <Link
@@ -30,7 +47,7 @@ const History = ({ chatSessions }) => {
               state={{ chat }}
               className="text-blue-600 hover:underline"
             >
-              Give Feedback
+              Give Feedback / Update Feedback
             </Link>
           </div>
         </div>

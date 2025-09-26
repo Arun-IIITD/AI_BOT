@@ -6,7 +6,6 @@ import History from "./history";
 import "./dashboard.css";
 import Feedback from "./feedback";
 
-
 const STORAGE_KEY = "chatSessions";
 
 const App = () => {
@@ -19,11 +18,9 @@ const App = () => {
     if (stored) setChatSessions(JSON.parse(stored));
   }, []);
 
-  // Save to localStorage
+  // Save to localStorage always
   useEffect(() => {
-    if (chatSessions.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(chatSessions));
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(chatSessions));
   }, [chatSessions]);
 
   const saveChatSession = (messages) => {
@@ -31,15 +28,17 @@ const App = () => {
     const firstUserMsg = messages.find((msg) => msg.sender === "You");
     const title = firstUserMsg?.text || `Chat ${chatSessions.length + 1}`;
 
-    if (activeChat) {
+    if (activeChat && activeChat.id) {
+      // Update existing chat
       const updatedChat = { ...activeChat, title, messages };
       setChatSessions((prev) =>
         prev.map((chat) => (chat.id === activeChat.id ? updatedChat : chat))
       );
       setActiveChat(updatedChat);
     } else {
+      // Create new chat
       const newSession = {
-        id: `${chatSessions.length + 1}`,
+        id: Date.now().toString(),
         title,
         messages,
       };
@@ -51,14 +50,8 @@ const App = () => {
   const loadChat = (chat) => setActiveChat(chat);
 
   const startNewChat = () => {
-    const timestamp = new Date().toLocaleString();
-    const newChat = {
-      id: `${chatSessions.length + 1}`,
-      title: `Chat at ${timestamp}`,
-      messages: [],
-    };
-    setChatSessions((prev) => [...prev, newChat]);
-    setActiveChat(newChat);
+    // Clear active chat for new conversation
+    setActiveChat({ id: null, title: "", messages: [] });
   };
 
   return (
@@ -78,9 +71,7 @@ const App = () => {
           startNewChat={startNewChat}
         />
         <div className="main-chat flex-1 p-4">
-
           <Routes>
-
             <Route
               path="/"
               element={
@@ -90,19 +81,15 @@ const App = () => {
                 />
               }
             />
-            
             <Route
               path="/history"
               element={<History chatSessions={chatSessions} />}
             />
-
             <Route
-            path="/feedback"
-            element = {<Feedback chatSessions={chatSessions} />}
-             />
-
+              path="/feedback"
+              element={<Feedback chatSessions={chatSessions} />}
+            />
           </Routes>
-
         </div>
       </div>
     </Router>
