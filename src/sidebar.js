@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
        <button
