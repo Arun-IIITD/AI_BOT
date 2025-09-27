@@ -66,7 +66,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
 
       </form>
 
-      <div className="message flex flex-col gap-2 mt-4">
+     <div className="message flex flex-col gap-2 mt-4">
 
         {messages.map((msg, idx) => (
           <div key ={idx}>
@@ -75,10 +75,6 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
                 {msg.sender === "You" ? "You" : "Soul AI"};
               </strong>{" "}
               {msg.text}
-              <strong>{msg.sender}:</strong> {msg.text}
-              { {msg.sender === "Soul AI" && (
-                <span className="ml-2 text-blue-600">Soul AI</span>
-              )} 
             </p>
             </div>
         ))}
