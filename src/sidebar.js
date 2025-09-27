@@ -1,20 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
-  const navigate = useNavigate();
   return (
     <div className="sidebar">
-       <button
-        className="sidebar-btn"
-        onClick={() => {
-          startNewChat();     // clear current chat
-          navigate("/");      // navigate to new chat route
-        }}
-      >
+      <Link to="/"  onClick={startNewChat}>
         New Chat
-      </button>
+      </Link>
 
         <Link to="/history" >
           Past Conversations
