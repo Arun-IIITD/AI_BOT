@@ -1,41 +1,82 @@
 .main-chat {
-  margin-left: 250px;   /* pushes chat beside sidebar */
+  margin-left: 200px;
   height: 100vh;
   background-color: #fff;
   z-index: 2;
-  display: flex;              /* enable flexbox */
-  justify-content: center;    /* horizontal center */
-  align-items: center;        /* vertical center */
+  display: flex;              
+  justify-content: flex-start;   
+  align-items: stretch;        
   position: relative;
+  flex-direction: column;
+  gap: 10px;
+  
 }
 
-.message {
-  margin: 8px 0;
-  padding: 6px;
-}
-.message.ai {
-  position: relative;
-}
-.feedback-btns {
-  display: none;
-  position: absolute;
-  right: 10px;
-  top: 0;
-}
-.message.ai:hover .feedback-btns {
-  display: inline-block;
+.chat-form{
+  display: flex;
+  gap: 20px;
+  width: 100%;
 }
 
-.stars {
-  font-size: 24px;
+.chat-input {
+  width: 400px;              /* make input take full remaining width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.chat-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  font-size: 15px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
-.star {
-  color: gray;
+
+.chat-btn:hover {
+  background-color: #0056b3;
 }
-.star.filled {
-  color: gold;
+
+
+
+/* Messages container */
+.messages-container {
+  flex: 1;                  /* take all available vertical space */
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  gap: 8px;                 /* spacing between messages */
+  overflow-y: auto;         /* scroll when messages exceed height */
+  padding-bottom: 16px;     /* space at bottom for input */
+  margin-left: 0px;
+  
 }
+
+/* Individual message */
+.message {
+ align-self: flex-start;  /* left-align all messages */
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid black;
+  max-width: 70%;
+  font-size: 16px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  background-color: rgb(233, 232, 229);
+  margin-top: 10px;      
+}
+
+
+
+
+
+
+
+
 
 
 

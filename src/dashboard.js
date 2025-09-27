@@ -36,42 +36,54 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
   };
 
   return (
-    <div className="main-chat flex flex-col gap-4 w-full max-w-md">
-      <form onSubmit={handleSubmit} className="flex gap-2">
+    <div className="main-chat ">
+
+      <form onSubmit={handleSubmit} className="chat-form">
+
         <input
           type="text"
           placeholder="Message Bot AI..."
           value={query}
+          className="chat-input"
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 p-2 border rounded"
+          
         />
+
         <button
           type="submit"
-          className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="chat-btn"
         >
           Ask
         </button>
+
         <button
-          type="button"
+          type="submit"
           onClick={handleSave}
-          className="px-3 py-2 bg-gray-300 rounded hover:bg-gray-400"
+          className="chat-btn"
         >
           Save
         </button>
+
       </form>
 
-      <div className="flex flex-col gap-2 mt-4">
+      <div className="message flex flex-col gap-2 mt-4">
+
         {messages.map((msg, idx) => (
-          <div key={idx}>
+          <div key ={idx}>
             <p>
-              <strong>{msg.sender}:</strong> {msg.text}
-              {/* {msg.sender === "Soul AI" && (
-                <span className="ml-2 text-blue-600">Soul AI</span>
-              )} */}
+              <strong>
+                {msg.sender === "You" ? "You" : "Soul AI"};
+              </strong>{" "}
+              {msg.text}
             </p>
-          </div>
+            </div>
         ))}
+
+
+
       </div>
+
+
     </div>
   );
 };

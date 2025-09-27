@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Sidebar from "./components/sidebar";
+import Sidebar from "./sidebar";
 import Dashboard from "./dashboard";
-import History from "./history";
-import Feedback from "./feedback";
 import "./dashboard.css";
 
 const STORAGE_KEY = "chatSessions";
@@ -72,7 +70,9 @@ const App = () => {
           startNewChat={startNewChat}
         />
         <div className="main-chat flex-1 p-4">
+
           <Routes>
+            
             <Route
               path="/"
               element={
@@ -82,14 +82,9 @@ const App = () => {
                 />
               }
             />
-            <Route
-              path="/history"
-              element={<History chatSessions={chatSessions} />}
-            />
-            <Route
-              path="/feedback"
-              element={<Feedback />}
-            />
+
+         
+    
           </Routes>
         </div>
       </div>
