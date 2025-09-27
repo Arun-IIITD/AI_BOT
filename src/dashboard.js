@@ -70,12 +70,15 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
 
         {messages.map((msg, idx) => (
           <div key ={idx}>
+
             <p>
-              <strong>
-                {msg.sender === "You" ? "You" : "Soul AI"};
-              </strong>{" "}
-              {msg.text}
-            </p>
+  <span>{msg.sender === "Soul AI" ? "Soul AI" : "You"}:</span> {msg.text}
+</p>
+
+
+           
+
+
             </div>
         ))}
 
