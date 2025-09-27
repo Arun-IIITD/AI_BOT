@@ -5,14 +5,22 @@ import "./Sidebar.css";
 const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
   return (
     <div className="sidebar">
-      <Link to="/" className="sidebar-btn" onClick={startNewChat}>
+       <button
+        className="sidebar-btn"
+        onClick={() => {
+          startNewChat();     // clear current chat
+          navigate("/");      // navigate to new chat route
+        }}
+      >
         New Chat
-      </Link>
+      </button>
 
-      <div className="sidebar-section">
-        <Link to="/history" className="sidebar-btn">
+        <Link to="/history" >
           Past Conversations
         </Link>
+
+      <div className="sidebar-section">
+      
 
         <ul className="sidebar-list">
           {chatSessions.length === 0 && <li>No conversations yet</li>}

@@ -1,16 +1,14 @@
 .sidebar {
-  position: fixed;
+  width: 190px;
+  height: 100vh;
+  position: fixed;      /* fixes it on the left */
   top: 0;
   left: 0;
-  width: 220px;
-  height: 100vh;
-  background-color: #f3eefc;
-  border-right: 1px solid #ddd;
-  padding: 15px;
+  background-color: #f1f1f1;
+  padding: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  z-index: 10;
 }
 
 

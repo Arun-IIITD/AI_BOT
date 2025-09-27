@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Sidebar from "./sidebar";
 import Dashboard from "./dashboard";
 import "./dashboard.css";
+import History from "./history";
 
 const STORAGE_KEY = "chatSessions";
 
@@ -54,15 +55,6 @@ const App = () => {
       <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
         <h1>Bot AI</h1>
 
-        <nav className="mt-2">
-          <Link to="/"  onClick={startNewChat}>
-            New Chat
-          </Link>
-          <Link to="/history" >
-            Past Conversations
-          </Link>
-        </nav>
-
       </header>
 
       <div className="flex h-screen">
@@ -84,6 +76,18 @@ const App = () => {
                 />
               }
             />
+
+            <Route 
+            path = "/history"
+            element = {<History 
+              chatSessions={chatSessions}
+
+              />
+            }
+            />
+
+         
+
 
          
     
