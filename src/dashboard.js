@@ -57,7 +57,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
         </button>
 
         <button
-          type="submit"
+          type="button"
           onClick={handleSave}
           className="chat-btn"
         >

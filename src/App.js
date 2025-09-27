@@ -53,14 +53,16 @@ const App = () => {
     <Router>
       <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
         <h1>Bot AI</h1>
+
         <nav className="mt-2">
-          <Link to="/" className="mr-4 header-btn" onClick={startNewChat}>
+          <Link to="/"  onClick={startNewChat}>
             New Chat
           </Link>
-          <Link to="/history" className="header-btn">
+          <Link to="/history" >
             Past Conversations
           </Link>
         </nav>
+
       </header>
 
       <div className="flex h-screen">
