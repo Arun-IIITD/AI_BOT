@@ -53,7 +53,7 @@ const App = () => {
   return (
     <Router>
       <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
-        <h1>Bot AI</h1>
+        <h1>Customer Support AI</h1>
 
       </header>
 
