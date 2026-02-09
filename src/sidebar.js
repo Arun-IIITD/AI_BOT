@@ -6,7 +6,7 @@ const Sidebar = ({ chatSessions, loadChat, startNewChat }) => {
   return (
     <div className="sidebar">
       <Link to="/"  onClick={startNewChat}>
-        New Chat
+        New Query?
       </Link>
 
         <Link to="/history" >

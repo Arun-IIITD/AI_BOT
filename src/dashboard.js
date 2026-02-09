@@ -24,7 +24,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
     const newMessages = [
       ...messages,
       { sender: "You", text: query },
-      { sender: "Soul AI", text: response },
+      { sender: "Customer Support AI", text: response },
     ];
 
     setMessages(newMessages);
@@ -42,7 +42,7 @@ const Dashboard = ({ activeChat, saveChatSession }) => {
 
         <input
           type="text"
-          placeholder="Message Bot AI..."
+          placeholder='Please tell me about your query!'
           value={query}
           className="chat-input"
           onChange={(e) => setQuery(e.target.value)}

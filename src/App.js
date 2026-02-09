@@ -52,10 +52,10 @@ const App = () => {
 
   return (
     <Router>
-      <header className="p-4 bg-gray-800 text-white flex justify-between items-center">
-        <h1>Customer Support AI</h1>
+    <header className="w-full p-4 bg-gray-800 text-white flex justify-center items-center">
+  <h1>Customer Support AI</h1>
+</header>
 
-      </header>
 
       <div className="flex h-screen">
         <Sidebar

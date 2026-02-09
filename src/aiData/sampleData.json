@@ -285,7 +285,21 @@
     "question": "Thanks",
     "response" : "We are closing"
 
+  },
+
+  {"id" : 57,
+   "question": "Hello",
+   "response": "Hello! How can I assist you today?"
+    
+  },
+
+   {"id" : 58,
+   "question":   "How do I contact customer support?",
+   "response":         "You can contact our customer support via email at support@example.com or call us at +1-800-123-4567."
+    
   }
+
+
 
 
 
